@@ -2,9 +2,9 @@
 
 Code developer: Jeff Kovach, MS
 
-The code was designed to transform a complex matrix (containing a variable number of rows and columns) into a one-line observation.
+The code was designed to transform a complex matrix (containing a variable number of rows and columns) and free text into a one-line observation.
 
-This folder contains 9 different scripts, 8 Python and 1 R that were used to process 12SL and INFO files. There is an additional csv file containing lead heading labels for the R script to use during data wrangling. 
+This folder contains 9 different scripts, 8 Python and 1 R, that were used to process files that contain free text and matrices of digits. There is an additional csv file containing lead heading labels for the R script to use during data wrangling. 
 
 Each of the Python scripts extracts data from a specific section of the files containing a matrix of digits and a text. The basic logic behind each Python file is as follows:
 
