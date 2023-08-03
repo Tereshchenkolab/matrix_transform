@@ -20,6 +20,6 @@ df = pd.concat(dict1)
 df['EcgID'] = df['EcgID'].str.replace(r'.txt','')
 df.columns.name = None
 
-df.to_csv('Output/CRIC_INFO_DEMO.csv', index=False)  
+df.to_csv('Output/ECG_INFO_DEMO.csv', index=False)  
 
 
