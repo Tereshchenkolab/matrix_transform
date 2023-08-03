@@ -25,7 +25,7 @@ ds_demo_2 <- list.files(path=filepath_demo, full.names = TRUE) %>%
 
 ## Section 3. Leads
 
-lead_labels <- read_csv("Output/combined_files/leads_12sl_col_labels.csv") %>% pull(1)
+lead_labels <- read_csv("Output/combined_files/leads_ecg_col_labels.csv") %>% pull(1)
 
 filepath_leads <- "Output/leads"
 
@@ -56,9 +56,9 @@ ds_qrs_type_5 <- list.files(path=filepath_qrs_type, full.names = TRUE) %>%
 
 ## Section 6. Minn info
 
-filepath_minn12 <- "Output/min12sl"
+filepath_minecg <- "Output/minecg"
 
-ds_minn12_6 <- list.files(path=filepath_minn12, full.names = TRUE) %>% 
+ds_minecg_6 <- list.files(path=filepath_minecg, full.names = TRUE) %>% 
   lapply(read_csv, col_types = cols(.default = "c")) %>% 
   bind_rows 
 
@@ -77,7 +77,7 @@ ds_final <- ds_datetime_1 %>%
                           left_join(.,ds_leads_3, by = "EcgID") %>%
                           left_join(., ds_pqrs_peak_4,by = "EcgID") %>%
                           left_join(., ds_qrs_type_5,by = "EcgID") %>%
-                          left_join(., ds_minn12_6,by = "EcgID") %>%
+                          left_join(., ds_minecg_6,by = "EcgID") %>%
                           left_join(., ds_end_7,by = "EcgID") %>%
                           relocate(EcgID) %>%
-                          write_csv(.,"Output/combined_files/cric_batch2_12sl.csv")
+                          write_csv(.,"Output/combined_files/ecg_transformedDS.csv")
