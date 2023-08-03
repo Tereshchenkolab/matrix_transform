@@ -50,675 +50,675 @@ for file in filenames:
        filesUnknown.append(file)
 
 
- min12sl = pd.read_fwf("70723216.txt", header= None, colspecs = [(0, 100)], skiprows = 101, skipfooter = 4)
-     min12sl = min12sl[~min12sl[0].str.contains("No of", na=False)]
-     min12sl = min12sl[~min12sl[0].str.contains("No. of", na=False)]
-     min12sl = min12sl[~min12sl[0].str.contains("Comments", na=False)]
-     row = min12sl[min12sl[0] == '12SL Statement Code:'].index.tolist()[0]
-     min12sl = min12sl.iloc[row-1:]
-     min12sl_T = min12sl.T
+ minecg = pd.read_fwf("70723216.txt", header= None, colspecs = [(0, 100)], skiprows = 101, skipfooter = 4)
+     minecg = minecg[~minecg[0].str.contains("No of", na=False)]
+     minecg = minecg[~minecg[0].str.contains("No. of", na=False)]
+     minecg = minecg[~minecg[0].str.contains("Comments", na=False)]
+     row = minecg[minecg[0] == '12SL Statement Code:'].index.tolist()[0]
+     minecg = minecg.iloc[row-1:]
+     minecg_T = minecg.T
 
 
 
-min12sl_dict120 = {}
+minecg_dict120 = {}
 
 for file in files120:
-     min12sl = pd.read_fwf(file, header= None, colspecs = [(0, 100)], skiprows = 101, skipfooter = 4)
-     min12sl = min12sl[~min12sl[0].str.contains("No of", na=False)]
-     min12sl = min12sl[~min12sl[0].str.contains("No. of", na=False)]
-     min12sl = min12sl[~min12sl[0].str.contains("Comments", na=False)]
-     row = min12sl[min12sl[0] == '12SL Statement Code:'].index.tolist()[0]
-     min12sl = min12sl.iloc[row-1:]
-     min12sl_T = min12sl.T
-     if min12sl.shape[0] == 4 and pd.Series([1, 2,4,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2',5:'Minnestoa Code'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['Minnestoa Code'].str.split("\\s+", expand=True).add_prefix('minnesota_code_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A', 'Minnestoa Code'])
-     elif min12sl.shape[0] == 4 and pd.Series([1,2,3,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',3:'12SL Statement Code_B',5: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
-     elif min12sl.shape[0] == 3 and pd.Series([1,2,4]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
-     elif min12sl.shape[0] == 3 and pd.Series([2,3,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={2: 'drop1',3:'12SL Statement Code_A',5: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1','drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
+     minecg = pd.read_fwf(file, header= None, colspecs = [(0, 100)], skiprows = 101, skipfooter = 4)
+     minecg = minecg[~minecg[0].str.contains("No of", na=False)]
+     minecg = minecg[~minecg[0].str.contains("No. of", na=False)]
+     minecg = minecg[~minecg[0].str.contains("Comments", na=False)]
+     row = minecg[minecg[0] == '12SL Statement Code:'].index.tolist()[0]
+     minecg = minecg.iloc[row-1:]
+     minecg_T = minecg.T
+     if minecg.shape[0] == 4 and pd.Series([1, 2,4,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2',5:'Minnestoa Code'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['Minnestoa Code'].str.split("\\s+", expand=True).add_prefix('minnesota_code_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A', 'Minnestoa Code'])
+     elif minecg.shape[0] == 4 and pd.Series([1,2,3,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',3:'12SL Statement Code_B',5: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
+     elif minecg.shape[0] == 3 and pd.Series([1,2,4]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
+     elif minecg.shape[0] == 3 and pd.Series([2,3,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={2: 'drop1',3:'12SL Statement Code_A',5: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1','drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
      else:
        pass
-     min12sl['EcgID']=file
-     cols = list(min12sl.columns)
+     minecg['EcgID']=file
+     cols = list(minecg.columns)
      cols = [cols[-1]] + cols[:-1]
-     min12sl = min12sl[cols]
-     min12sl_dict120.update({file: min12sl})
+     minecg = minecg[cols]
+     minecg_dict120.update({file: minecg})
      
-min12sl_df = pd.concat(min12sl_dict120) 
-min12sl_df['EcgID'] = min12sl_df['EcgID'].str.replace(r'.txt','')
-min12sl_df.columns.name = None
-min12sl_df.to_csv('Output/min12sl/min12sl_120_df.csv', index=False) 
+minecg_df = pd.concat(minecg_dict120) 
+minecg_df['EcgID'] = minecg_df['EcgID'].str.replace(r'.txt','')
+minecg_df.columns.name = None
+minecg_df.to_csv('Output/minecg/minecg_120_df.csv', index=False) 
 
-min12sl_dict121 = {}
+minecg_dict121 = {}
 
 for file in files121:
-     min12sl = pd.read_fwf(file, header= None, colspecs = [(0, 100)], skiprows = 101, skipfooter = 4)
-     min12sl = min12sl[~min12sl[0].str.contains("No of", na=False)]
-     min12sl = min12sl[~min12sl[0].str.contains("No. of", na=False)]
-     min12sl = min12sl[~min12sl[0].str.contains("Comments", na=False)]
-     row = min12sl[min12sl[0] == '12SL Statement Code:'].index.tolist()[0]
-     min12sl = min12sl.iloc[row-1:]
-     min12sl_T = min12sl.T
-     if min12sl.shape[0] == 4 and pd.Series([1, 2,4,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2',5:'Minnestoa Code'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['Minnestoa Code'].str.split("\\s+", expand=True).add_prefix('minnesota_code_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A', 'Minnestoa Code'])
-     elif min12sl.shape[0] == 4 and pd.Series([1,2,3,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',3:'12SL Statement Code_B',5: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
-     elif min12sl.shape[0] == 3 and pd.Series([1,2,4]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
-     elif min12sl.shape[0] == 3 and pd.Series([2,3,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={2: 'drop1',3:'12SL Statement Code_A',5: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1','drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
+     minecg = pd.read_fwf(file, header= None, colspecs = [(0, 100)], skiprows = 101, skipfooter = 4)
+     minecg = minecg[~minecg[0].str.contains("No of", na=False)]
+     minecg = minecg[~minecg[0].str.contains("No. of", na=False)]
+     minecg = minecg[~minecg[0].str.contains("Comments", na=False)]
+     row = minecg[minecg[0] == '12SL Statement Code:'].index.tolist()[0]
+     minecg = minecg.iloc[row-1:]
+     minecg_T = minecg.T
+     if minecg.shape[0] == 4 and pd.Series([1, 2,4,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2',5:'Minnestoa Code'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['Minnestoa Code'].str.split("\\s+", expand=True).add_prefix('minnesota_code_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A', 'Minnestoa Code'])
+     elif minecg.shape[0] == 4 and pd.Series([1,2,3,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',3:'12SL Statement Code_B',5: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
+     elif minecg.shape[0] == 3 and pd.Series([1,2,4]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
+     elif minecg.shape[0] == 3 and pd.Series([2,3,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={2: 'drop1',3:'12SL Statement Code_A',5: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1','drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
      else:
        pass
-     min12sl['EcgID']=file
-     cols = list(min12sl.columns)
+     minecg['EcgID']=file
+     cols = list(minecg.columns)
      cols = [cols[-1]] + cols[:-1]
-     min12sl = min12sl[cols]
-     min12sl_dict121.update({file: min12sl})
+     minecg = minecg[cols]
+     minecg_dict121.update({file: minecg})
      
-min12sl_df = pd.concat(min12sl_dict121) 
-min12sl_df['EcgID'] = min12sl_df['EcgID'].str.replace(r'.txt','')
-min12sl_df.columns.name = None
-min12sl_df.to_csv('Output/min12sl/min12sl_121_df.csv', index=False) 
+minecg_df = pd.concat(minecg_dict121) 
+minecg_df['EcgID'] = minecg_df['EcgID'].str.replace(r'.txt','')
+minecg_df.columns.name = None
+minecg_df.to_csv('Output/minecg/minecg_121_df.csv', index=False) 
 
-min12sl_dict122 = {}
+minecg_dict122 = {}
 
 for file in files122:
-     min12sl = pd.read_fwf(file, header= None, colspecs = [(0, 100)], skiprows = 101, skipfooter = 4)
-     min12sl = min12sl[~min12sl[0].str.contains("No of", na=False)]
-     min12sl = min12sl[~min12sl[0].str.contains("No. of", na=False)]
-     min12sl = min12sl[~min12sl[0].str.contains("Comments", na=False)]
-     row = min12sl[min12sl[0] == '12SL Statement Code:'].index.tolist()[0]
-     min12sl = min12sl.iloc[row-1:]
-     min12sl_T = min12sl.T
-     if min12sl.shape[0] == 4 and pd.Series([1, 2,4,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2',5:'Minnestoa Code'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['Minnestoa Code'].str.split("\\s+", expand=True).add_prefix('minnesota_code_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A', 'Minnestoa Code'])
-     elif min12sl.shape[0] == 4 and pd.Series([1,2,3,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',3:'12SL Statement Code_B',5: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
-     elif min12sl.shape[0] == 3 and pd.Series([1,2,4]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
-     elif min12sl.shape[0] == 3 and pd.Series([2,3,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={2: 'drop1',3:'12SL Statement Code_A',5: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1','drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
+     minecg = pd.read_fwf(file, header= None, colspecs = [(0, 100)], skiprows = 101, skipfooter = 4)
+     minecg = minecg[~minecg[0].str.contains("No of", na=False)]
+     minecg = minecg[~minecg[0].str.contains("No. of", na=False)]
+     minecg = minecg[~minecg[0].str.contains("Comments", na=False)]
+     row = minecg[minecg[0] == '12SL Statement Code:'].index.tolist()[0]
+     minecg = minecg.iloc[row-1:]
+     minecg_T = minecg.T
+     if minecg.shape[0] == 4 and pd.Series([1, 2,4,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2',5:'Minnestoa Code'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['Minnestoa Code'].str.split("\\s+", expand=True).add_prefix('minnesota_code_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A', 'Minnestoa Code'])
+     elif minecg.shape[0] == 4 and pd.Series([1,2,3,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',3:'12SL Statement Code_B',5: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
+     elif minecg.shape[0] == 3 and pd.Series([1,2,4]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
+     elif minecg.shape[0] == 3 and pd.Series([2,3,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={2: 'drop1',3:'12SL Statement Code_A',5: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1','drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
      else:
        pass
-     min12sl['EcgID']=file
-     cols = list(min12sl.columns)
+     minecg['EcgID']=file
+     cols = list(minecg.columns)
      cols = [cols[-1]] + cols[:-1]
-     min12sl = min12sl[cols]
-     min12sl_dict122.update({file: min12sl})
+     minecg = minecg[cols]
+     minecg_dict122.update({file: minecg})
      
-min12sl_df = pd.concat(min12sl_dict122) 
-min12sl_df['EcgID'] = min12sl_df['EcgID'].str.replace(r'.txt','')
-min12sl_df.columns.name = None
-min12sl_df.to_csv('Output/min12sl/min12sl_122_df.csv', index=False) 
+minecg_df = pd.concat(minecg_dict122) 
+minecg_df['EcgID'] = minecg_df['EcgID'].str.replace(r'.txt','')
+minecg_df.columns.name = None
+minecg_df.to_csv('Output/minecg/minecg_122_df.csv', index=False) 
 
 
-min12sl_dict123 = {}
+minecg_dict123 = {}
 
 for file in files123:
-     min12sl = pd.read_fwf(file, header= None, colspecs = [(0, 100)], skiprows = 101, skipfooter = 4)
-     min12sl = min12sl[~min12sl[0].str.contains("No of", na=False)]
-     min12sl = min12sl[~min12sl[0].str.contains("No. of", na=False)]
-     min12sl = min12sl[~min12sl[0].str.contains("Comments", na=False)]
-     row = min12sl[min12sl[0] == '12SL Statement Code:'].index.tolist()[0]
-     min12sl = min12sl.iloc[row-1:]
-     min12sl_T = min12sl.T
-     if min12sl.shape[0] == 4 and pd.Series([1, 2,4,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2',5:'Minnestoa Code'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['Minnestoa Code'].str.split("\\s+", expand=True).add_prefix('minnesota_code_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A', 'Minnestoa Code'])
-     elif min12sl.shape[0] == 4 and pd.Series([1,2,3,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',3:'12SL Statement Code_B',5: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
-     elif min12sl.shape[0] == 4 and pd.Series([2,3,4,6]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={2: 'drop1', 3: '12SL Statement Code_A',4:'12SL Statement Code_B',6: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
-     elif min12sl.shape[0] == 3 and pd.Series([1,2,4]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
-     elif min12sl.shape[0] == 3 and pd.Series([2,3,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={2: 'drop1',3:'12SL Statement Code_A',5: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1','drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
-     elif min12sl.shape[0] == 3 and pd.Series([3,4,6]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={3: 'drop1',4:'12SL Statement Code_A',6: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1','drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
+     minecg = pd.read_fwf(file, header= None, colspecs = [(0, 100)], skiprows = 101, skipfooter = 4)
+     minecg = minecg[~minecg[0].str.contains("No of", na=False)]
+     minecg = minecg[~minecg[0].str.contains("No. of", na=False)]
+     minecg = minecg[~minecg[0].str.contains("Comments", na=False)]
+     row = minecg[minecg[0] == '12SL Statement Code:'].index.tolist()[0]
+     minecg = minecg.iloc[row-1:]
+     minecg_T = minecg.T
+     if minecg.shape[0] == 4 and pd.Series([1, 2,4,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2',5:'Minnestoa Code'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['Minnestoa Code'].str.split("\\s+", expand=True).add_prefix('minnesota_code_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A', 'Minnestoa Code'])
+     elif minecg.shape[0] == 4 and pd.Series([1,2,3,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',3:'12SL Statement Code_B',5: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
+     elif minecg.shape[0] == 4 and pd.Series([2,3,4,6]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={2: 'drop1', 3: '12SL Statement Code_A',4:'12SL Statement Code_B',6: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
+     elif minecg.shape[0] == 3 and pd.Series([1,2,4]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
+     elif minecg.shape[0] == 3 and pd.Series([2,3,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={2: 'drop1',3:'12SL Statement Code_A',5: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1','drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
+     elif minecg.shape[0] == 3 and pd.Series([3,4,6]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={3: 'drop1',4:'12SL Statement Code_A',6: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1','drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
      else:
        pass
-     min12sl['EcgID']=file
-     cols = list(min12sl.columns)
+     minecg['EcgID']=file
+     cols = list(minecg.columns)
      cols = [cols[-1]] + cols[:-1]
-     min12sl = min12sl[cols]
-     min12sl_dict123.update({file: min12sl})
+     minecg = minecg[cols]
+     minecg_dict123.update({file: minecg})
      
-min12sl_df = pd.concat(min12sl_dict123) 
-min12sl_df['EcgID'] = min12sl_df['EcgID'].str.replace(r'.txt','')
-min12sl_df.columns.name = None
-min12sl_df.to_csv('Output/min12sl/min12sl_123_df.csv', index=False) 
+minecg_df = pd.concat(minecg_dict123) 
+minecg_df['EcgID'] = minecg_df['EcgID'].str.replace(r'.txt','')
+minecg_df.columns.name = None
+minecg_df.to_csv('Output/minecg/minecg_123_df.csv', index=False) 
 
-min12sl_dict124 = {}
+minecg_dict124 = {}
 
 for file in files124:
-     min12sl = pd.read_fwf(file, header= None, colspecs = [(0, 100)], skiprows = 101, skipfooter = 4)
-     min12sl = min12sl[~min12sl[0].str.contains("No of", na=False)]
-     min12sl = min12sl[~min12sl[0].str.contains("No. of", na=False)]
-     min12sl = min12sl[~min12sl[0].str.contains("Comments", na=False)]
-     row = min12sl[min12sl[0] == '12SL Statement Code:'].index.tolist()[0]
-     min12sl = min12sl.iloc[row-1:]
-     min12sl_T = min12sl.T
-     if min12sl.shape[0] == 4 and pd.Series([1, 2,4,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2',5:'Minnestoa Code'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['Minnestoa Code'].str.split("\\s+", expand=True).add_prefix('minnesota_code_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A', 'Minnestoa Code'])
-     elif min12sl.shape[0] == 4 and pd.Series([1,2,3,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',3:'12SL Statement Code_B',5: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
-     elif min12sl.shape[0] == 4 and pd.Series([2,3,4,6]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={2: 'drop1', 3: '12SL Statement Code_A',4:'12SL Statement Code_B',6: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
-     elif min12sl.shape[0] == 3 and pd.Series([1,2,4]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
-     elif min12sl.shape[0] == 3 and pd.Series([2,3,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={2: 'drop1',3:'12SL Statement Code_A',5: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1','drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
-     elif min12sl.shape[0] == 3 and pd.Series([3,4,6]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={3: 'drop1',4:'12SL Statement Code_A',6: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1','drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
-     elif min12sl.shape[0] == 4 and pd.Series([3,4,5,7]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={3: 'drop1', 4: '12SL Statement Code_A',5:'12SL Statement Code_B',7: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
+     minecg = pd.read_fwf(file, header= None, colspecs = [(0, 100)], skiprows = 101, skipfooter = 4)
+     minecg = minecg[~minecg[0].str.contains("No of", na=False)]
+     minecg = minecg[~minecg[0].str.contains("No. of", na=False)]
+     minecg = minecg[~minecg[0].str.contains("Comments", na=False)]
+     row = minecg[minecg[0] == '12SL Statement Code:'].index.tolist()[0]
+     minecg = minecg.iloc[row-1:]
+     minecg_T = minecg.T
+     if minecg.shape[0] == 4 and pd.Series([1, 2,4,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2',5:'Minnestoa Code'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['Minnestoa Code'].str.split("\\s+", expand=True).add_prefix('minnesota_code_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A', 'Minnestoa Code'])
+     elif minecg.shape[0] == 4 and pd.Series([1,2,3,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',3:'12SL Statement Code_B',5: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
+     elif minecg.shape[0] == 4 and pd.Series([2,3,4,6]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={2: 'drop1', 3: '12SL Statement Code_A',4:'12SL Statement Code_B',6: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
+     elif minecg.shape[0] == 3 and pd.Series([1,2,4]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
+     elif minecg.shape[0] == 3 and pd.Series([2,3,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={2: 'drop1',3:'12SL Statement Code_A',5: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1','drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
+     elif minecg.shape[0] == 3 and pd.Series([3,4,6]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={3: 'drop1',4:'12SL Statement Code_A',6: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1','drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
+     elif minecg.shape[0] == 4 and pd.Series([3,4,5,7]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={3: 'drop1', 4: '12SL Statement Code_A',5:'12SL Statement Code_B',7: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
      else:
        pass
-     min12sl['EcgID']=file
-     cols = list(min12sl.columns)
+     minecg['EcgID']=file
+     cols = list(minecg.columns)
      cols = [cols[-1]] + cols[:-1]
-     min12sl = min12sl[cols]
-     min12sl_dict124.update({file: min12sl})
+     minecg = minecg[cols]
+     minecg_dict124.update({file: minecg})
      
-min12sl_df = pd.concat(min12sl_dict124) 
-min12sl_df['EcgID'] = min12sl_df['EcgID'].str.replace(r'.txt','')
-min12sl_df.columns.name = None
-min12sl_df.to_csv('Output/min12sl/min12sl_124_df.csv', index=False) 
+minecg_df = pd.concat(minecg_dict124) 
+minecg_df['EcgID'] = minecg_df['EcgID'].str.replace(r'.txt','')
+minecg_df.columns.name = None
+minecg_df.to_csv('Output/minecg/minecg_124_df.csv', index=False) 
 
-min12sl_dict125 = {}
+minecg_dict125 = {}
 
 for file in files125:
-     min12sl = pd.read_fwf(file, header= None, colspecs = [(0, 100)], skiprows = 103, skipfooter = 4)
-     min12sl = min12sl[~min12sl[0].str.contains("No of", na=False)]
-     min12sl = min12sl[~min12sl[0].str.contains("No. of", na=False)]
-     min12sl = min12sl[~min12sl[0].str.contains("Comments", na=False)]
-     row = min12sl[min12sl[0] == '12SL Statement Code:'].index.tolist()[0]
-     min12sl = min12sl.iloc[row-1:]
-     min12sl_T = min12sl.T
-     if min12sl.shape[0] == 4 and pd.Series([1, 2,4,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2',5:'Minnestoa Code'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['Minnestoa Code'].str.split("\\s+", expand=True).add_prefix('minnesota_code_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A', 'Minnestoa Code'])
-     elif min12sl.shape[0] == 4 and pd.Series([1,2,3,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',3:'12SL Statement Code_B',5: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
-     elif min12sl.shape[0] == 4 and pd.Series([2,3,4,6]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={2: 'drop1', 3: '12SL Statement Code_A',4:'12SL Statement Code_B',6: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
-     elif min12sl.shape[0] == 3 and pd.Series([1,2,4]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
-     elif min12sl.shape[0] == 3 and pd.Series([2,3,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={2: 'drop1',3:'12SL Statement Code_A',5: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1','drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
-     elif min12sl.shape[0] == 3 and pd.Series([3,4,6]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={3: 'drop1',4:'12SL Statement Code_A',6: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1','drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
-     elif min12sl.shape[0] == 3 and pd.Series([5,6,8]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={5: 'drop1',6:'12SL Statement Code_A',8: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1','drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
+     minecg = pd.read_fwf(file, header= None, colspecs = [(0, 100)], skiprows = 103, skipfooter = 4)
+     minecg = minecg[~minecg[0].str.contains("No of", na=False)]
+     minecg = minecg[~minecg[0].str.contains("No. of", na=False)]
+     minecg = minecg[~minecg[0].str.contains("Comments", na=False)]
+     row = minecg[minecg[0] == '12SL Statement Code:'].index.tolist()[0]
+     minecg = minecg.iloc[row-1:]
+     minecg_T = minecg.T
+     if minecg.shape[0] == 4 and pd.Series([1, 2,4,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2',5:'Minnestoa Code'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['Minnestoa Code'].str.split("\\s+", expand=True).add_prefix('minnesota_code_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A', 'Minnestoa Code'])
+     elif minecg.shape[0] == 4 and pd.Series([1,2,3,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',3:'12SL Statement Code_B',5: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
+     elif minecg.shape[0] == 4 and pd.Series([2,3,4,6]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={2: 'drop1', 3: '12SL Statement Code_A',4:'12SL Statement Code_B',6: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
+     elif minecg.shape[0] == 3 and pd.Series([1,2,4]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
+     elif minecg.shape[0] == 3 and pd.Series([2,3,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={2: 'drop1',3:'12SL Statement Code_A',5: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1','drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
+     elif minecg.shape[0] == 3 and pd.Series([3,4,6]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={3: 'drop1',4:'12SL Statement Code_A',6: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1','drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
+     elif minecg.shape[0] == 3 and pd.Series([5,6,8]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={5: 'drop1',6:'12SL Statement Code_A',8: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1','drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
      else:
        pass
-     min12sl['EcgID']=file
-     cols = list(min12sl.columns)
+     minecg['EcgID']=file
+     cols = list(minecg.columns)
      cols = [cols[-1]] + cols[:-1]
-     min12sl = min12sl[cols]
-     min12sl_dict125.update({file: min12sl})
+     minecg = minecg[cols]
+     minecg_dict125.update({file: minecg})
      
-min12sl_df = pd.concat(min12sl_dict125) 
-min12sl_df['EcgID'] = min12sl_df['EcgID'].str.replace(r'.txt','')
-min12sl_df.columns.name = None
-min12sl_df.to_csv('Output/min12sl/min12sl_125_df.csv', index=False) 
+minecg_df = pd.concat(minecg_dict125) 
+minecg_df['EcgID'] = minecg_df['EcgID'].str.replace(r'.txt','')
+minecg_df.columns.name = None
+minecg_df.to_csv('Output/minecg/minecg_125_df.csv', index=False) 
 
-min12sl_dict127 = {}
+minecg_dict127 = {}
 
 for file in files127:
-     min12sl = pd.read_fwf(file, header= None, colspecs = [(0, 100)], skiprows = 107, skipfooter = 4)
-     min12sl = min12sl[~min12sl[0].str.contains("No of", na=False)]
-     min12sl = min12sl[~min12sl[0].str.contains("No. of", na=False)]
-     min12sl = min12sl[~min12sl[0].str.contains("Comments", na=False)]
-     row = min12sl[min12sl[0] == '12SL Statement Code:'].index.tolist()[0]
-     min12sl = min12sl.iloc[row-1:]
-     min12sl.reset_index(drop=True, inplace=True)
-     min12sl_T = min12sl.T
-     if min12sl.shape[0] == 4 and pd.Series([1, 2,4,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2',5:'Minnestoa Code'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['Minnestoa Code'].str.split("\\s+", expand=True).add_prefix('minnesota_code_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A', 'Minnestoa Code'])
-     elif min12sl.shape[0] == 4 and pd.Series([1,2,3,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',3:'12SL Statement Code_B',5: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
-     elif min12sl.shape[0] == 4 and pd.Series([2,3,4,6]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={2: 'drop1', 3: '12SL Statement Code_A',4:'12SL Statement Code_B',6: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
-     elif min12sl.shape[0] == 3 and pd.Series([0,1,2]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={0: 'drop1', 1: '12SL Statement Code_A',2: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
-     elif min12sl.shape[0] == 3 and pd.Series([2,3,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={2: 'drop1',3:'12SL Statement Code_A',5: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1','drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
-     elif min12sl.shape[0] == 3 and pd.Series([3,4,6]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={3: 'drop1',4:'12SL Statement Code_A',6: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1','drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
+     minecg = pd.read_fwf(file, header= None, colspecs = [(0, 100)], skiprows = 107, skipfooter = 4)
+     minecg = minecg[~minecg[0].str.contains("No of", na=False)]
+     minecg = minecg[~minecg[0].str.contains("No. of", na=False)]
+     minecg = minecg[~minecg[0].str.contains("Comments", na=False)]
+     row = minecg[minecg[0] == '12SL Statement Code:'].index.tolist()[0]
+     minecg = minecg.iloc[row-1:]
+     minecg.reset_index(drop=True, inplace=True)
+     minecg_T = minecg.T
+     if minecg.shape[0] == 4 and pd.Series([1, 2,4,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2',5:'Minnestoa Code'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['Minnestoa Code'].str.split("\\s+", expand=True).add_prefix('minnesota_code_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A', 'Minnestoa Code'])
+     elif minecg.shape[0] == 4 and pd.Series([1,2,3,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',3:'12SL Statement Code_B',5: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
+     elif minecg.shape[0] == 4 and pd.Series([2,3,4,6]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={2: 'drop1', 3: '12SL Statement Code_A',4:'12SL Statement Code_B',6: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
+     elif minecg.shape[0] == 3 and pd.Series([0,1,2]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={0: 'drop1', 1: '12SL Statement Code_A',2: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
+     elif minecg.shape[0] == 3 and pd.Series([2,3,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={2: 'drop1',3:'12SL Statement Code_A',5: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1','drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
+     elif minecg.shape[0] == 3 and pd.Series([3,4,6]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={3: 'drop1',4:'12SL Statement Code_A',6: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1','drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
      else:
        pass
-     min12sl['EcgID']=file
-     cols = list(min12sl.columns)
+     minecg['EcgID']=file
+     cols = list(minecg.columns)
      cols = [cols[-1]] + cols[:-1]
-     min12sl = min12sl[cols]
-     min12sl_dict127.update({file: min12sl})
+     minecg = minecg[cols]
+     minecg_dict127.update({file: minecg})
      
-min12sl_df = pd.concat(min12sl_dict127) 
-min12sl_df['EcgID'] = min12sl_df['EcgID'].str.replace(r'.txt','')
-min12sl_df.columns.name = None
-min12sl_df.to_csv('Output/min12sl/min12sl_127_df.csv', index=False) 
+minecg_df = pd.concat(minecg_dict127) 
+minecg_df['EcgID'] = minecg_df['EcgID'].str.replace(r'.txt','')
+minecg_df.columns.name = None
+minecg_df.to_csv('Output/minecg/minecg_127_df.csv', index=False) 
 
-min12sl_dict128 = {}
+minecg_dict128 = {}
 
 for file in files128:
-     min12sl = pd.read_fwf(file, header= None, colspecs = [(0, 100)], skiprows = 101, skipfooter = 4)
-     min12sl = min12sl[~min12sl[0].str.contains("No of", na=False)]
-     min12sl = min12sl[~min12sl[0].str.contains("No. of", na=False)]
-     min12sl = min12sl[~min12sl[0].str.contains("Comments", na=False)]
-     row = min12sl[min12sl[0] == '12SL Statement Code:'].index.tolist()[0]
-     min12sl = min12sl.iloc[row-1:]
-     min12sl.reset_index(drop=True, inplace=True)
-     min12sl_T = min12sl.T
-     if min12sl.shape[0] == 4 and pd.Series([1, 2,4,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2',5:'Minnestoa Code'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['Minnestoa Code'].str.split("\\s+", expand=True).add_prefix('minnesota_code_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A', 'Minnestoa Code'])
-     elif min12sl.shape[0] == 4 and pd.Series([1,2,3,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',3:'12SL Statement Code_B',5: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
-     elif min12sl.shape[0] == 4 and pd.Series([0,1,2,3]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={0: 'drop1', 1: '12SL Statement Code_A',2:'12SL Statement Code_B',3: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
-     elif min12sl.shape[0] == 3 and pd.Series([0,1,2]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={0: 'drop1', 1: '12SL Statement Code_A',2: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
-     elif min12sl.shape[0] == 3 and pd.Series([2,3,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={2: 'drop1',3:'12SL Statement Code_A',5: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1','drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
-     elif min12sl.shape[0] == 3 and pd.Series([3,4,6]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={3: 'drop1',4:'12SL Statement Code_A',6: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1','drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
+     minecg = pd.read_fwf(file, header= None, colspecs = [(0, 100)], skiprows = 101, skipfooter = 4)
+     minecg = minecg[~minecg[0].str.contains("No of", na=False)]
+     minecg = minecg[~minecg[0].str.contains("No. of", na=False)]
+     minecg = minecg[~minecg[0].str.contains("Comments", na=False)]
+     row = minecg[minecg[0] == '12SL Statement Code:'].index.tolist()[0]
+     minecg = minecg.iloc[row-1:]
+     minecg.reset_index(drop=True, inplace=True)
+     minecg_T = minecg.T
+     if minecg.shape[0] == 4 and pd.Series([1, 2,4,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2',5:'Minnestoa Code'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['Minnestoa Code'].str.split("\\s+", expand=True).add_prefix('minnesota_code_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A', 'Minnestoa Code'])
+     elif minecg.shape[0] == 4 and pd.Series([1,2,3,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',3:'12SL Statement Code_B',5: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
+     elif minecg.shape[0] == 4 and pd.Series([0,1,2,3]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={0: 'drop1', 1: '12SL Statement Code_A',2:'12SL Statement Code_B',3: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
+     elif minecg.shape[0] == 3 and pd.Series([0,1,2]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={0: 'drop1', 1: '12SL Statement Code_A',2: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
+     elif minecg.shape[0] == 3 and pd.Series([2,3,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={2: 'drop1',3:'12SL Statement Code_A',5: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1','drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
+     elif minecg.shape[0] == 3 and pd.Series([3,4,6]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={3: 'drop1',4:'12SL Statement Code_A',6: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1','drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
      else:
        pass
-     min12sl['EcgID']=file
-     cols = list(min12sl.columns)
+     minecg['EcgID']=file
+     cols = list(minecg.columns)
      cols = [cols[-1]] + cols[:-1]
-     min12sl = min12sl[cols]
-     min12sl_dict128.update({file: min12sl})
+     minecg = minecg[cols]
+     minecg_dict128.update({file: minecg})
      
-min12sl_df = pd.concat(min12sl_dict128) 
-min12sl_df['EcgID'] = min12sl_df['EcgID'].str.replace(r'.txt','')
-min12sl_df.columns.name = None
-min12sl_df.to_csv('Output/min12sl/min12sl_128_df.csv', index=False) 
+minecg_df = pd.concat(minecg_dict128) 
+minecg_df['EcgID'] = minecg_df['EcgID'].str.replace(r'.txt','')
+minecg_df.columns.name = None
+minecg_df.to_csv('Output/minecg/minecg_128_df.csv', index=False) 
 
-min12sl_dict129 = {}
+minecg_dict129 = {}
 
 for file in files129:
-     min12sl = pd.read_fwf(file, header= None, colspecs = [(0, 100)], skiprows = 101, skipfooter = 4)
-     min12sl = min12sl[~min12sl[0].str.contains("No of", na=False)]
-     min12sl = min12sl[~min12sl[0].str.contains("No. of", na=False)]
-     min12sl = min12sl[~min12sl[0].str.contains("Comments", na=False)]
-     row = min12sl[min12sl[0] == '12SL Statement Code:'].index.tolist()[0]
-     min12sl = min12sl.iloc[row-1:]
-     min12sl.reset_index(drop=True, inplace=True)
-     min12sl_T = min12sl.T
-     if min12sl.shape[0] == 4 and pd.Series([1, 2,4,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2',5:'Minnestoa Code'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['Minnestoa Code'].str.split("\\s+", expand=True).add_prefix('minnesota_code_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A', 'Minnestoa Code'])
-     elif min12sl.shape[0] == 4 and pd.Series([0,1,2,3]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={0: 'drop1', 1: '12SL Statement Code_A',2:'12SL Statement Code_B',3: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
-     elif min12sl.shape[0] == 4 and pd.Series([2,3,4,6]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={2: 'drop1', 3: '12SL Statement Code_A',4:'12SL Statement Code_B',6: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
-     elif min12sl.shape[0] == 3 and pd.Series([0,1,2]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={0: 'drop1', 1: '12SL Statement Code_A',2: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
-     elif min12sl.shape[0] == 3 and pd.Series([2,3,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={2: 'drop1',3:'12SL Statement Code_A',5: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1','drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
-     elif min12sl.shape[0] == 3 and pd.Series([3,4,6]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={3: 'drop1',4:'12SL Statement Code_A',6: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1','drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
+     minecg = pd.read_fwf(file, header= None, colspecs = [(0, 100)], skiprows = 101, skipfooter = 4)
+     minecg = minecg[~minecg[0].str.contains("No of", na=False)]
+     minecg = minecg[~minecg[0].str.contains("No. of", na=False)]
+     minecg = minecg[~minecg[0].str.contains("Comments", na=False)]
+     row = minecg[minecg[0] == '12SL Statement Code:'].index.tolist()[0]
+     minecg = minecg.iloc[row-1:]
+     minecg.reset_index(drop=True, inplace=True)
+     minecg_T = minecg.T
+     if minecg.shape[0] == 4 and pd.Series([1, 2,4,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2',5:'Minnestoa Code'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['Minnestoa Code'].str.split("\\s+", expand=True).add_prefix('minnesota_code_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A', 'Minnestoa Code'])
+     elif minecg.shape[0] == 4 and pd.Series([0,1,2,3]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={0: 'drop1', 1: '12SL Statement Code_A',2:'12SL Statement Code_B',3: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
+     elif minecg.shape[0] == 4 and pd.Series([2,3,4,6]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={2: 'drop1', 3: '12SL Statement Code_A',4:'12SL Statement Code_B',6: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
+     elif minecg.shape[0] == 3 and pd.Series([0,1,2]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={0: 'drop1', 1: '12SL Statement Code_A',2: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
+     elif minecg.shape[0] == 3 and pd.Series([2,3,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={2: 'drop1',3:'12SL Statement Code_A',5: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1','drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
+     elif minecg.shape[0] == 3 and pd.Series([3,4,6]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={3: 'drop1',4:'12SL Statement Code_A',6: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1','drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
      else:
        pass
-     min12sl['EcgID']=file
-     cols = list(min12sl.columns)
+     minecg['EcgID']=file
+     cols = list(minecg.columns)
      cols = [cols[-1]] + cols[:-1]
-     min12sl = min12sl[cols]
-     min12sl_dict129.update({file: min12sl})
+     minecg = minecg[cols]
+     minecg_dict129.update({file: minecg})
      
-min12sl_df = pd.concat(min12sl_dict129) 
-min12sl_df['EcgID'] = min12sl_df['EcgID'].str.replace(r'.txt','')
-min12sl_df.columns.name = None
-min12sl_df.to_csv('Output/min12sl/min12sl_129_df.csv', index=False) 
+minecg_df = pd.concat(minecg_dict129) 
+minecg_df['EcgID'] = minecg_df['EcgID'].str.replace(r'.txt','')
+minecg_df.columns.name = None
+minecg_df.to_csv('Output/minecg/minecg_129_df.csv', index=False) 
 
-min12sl_dict130 = {}
+minecg_dict130 = {}
 
 for file in files130:
-     min12sl = pd.read_fwf(file, header= None, colspecs = [(0, 100)], skiprows = 101, skipfooter = 4)
-     min12sl = min12sl[~min12sl[0].str.contains("No of", na=False)]
-     min12sl = min12sl[~min12sl[0].str.contains("No. of", na=False)]
-     min12sl = min12sl[~min12sl[0].str.contains("Comments", na=False)]
-     row = min12sl[min12sl[0] == '12SL Statement Code:'].index.tolist()[0]
-     min12sl = min12sl.iloc[row-1:]
-     min12sl.reset_index(drop=True, inplace=True)
-     min12sl_T = min12sl.T
-     if min12sl.shape[0] == 4 and pd.Series([1, 2,4,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2',5:'Minnestoa Code'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['Minnestoa Code'].str.split("\\s+", expand=True).add_prefix('minnesota_code_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A', 'Minnestoa Code'])
-     elif min12sl.shape[0] == 4 and pd.Series([1,2,3,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',3:'12SL Statement Code_B',5: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
-     elif min12sl.shape[0] == 4 and pd.Series([0,1,2,3]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={0: 'drop1', 1: '12SL Statement Code_A',2:'12SL Statement Code_B',3: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
-     elif min12sl.shape[0] == 3 and pd.Series([1,2,4]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
-     elif min12sl.shape[0] == 3 and pd.Series([2,3,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={2: 'drop1',3:'12SL Statement Code_A',5: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1','drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
-     elif min12sl.shape[0] == 3 and pd.Series([0,1,2]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={0: 'drop1',1:'12SL Statement Code_A',2: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1','drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
+     minecg = pd.read_fwf(file, header= None, colspecs = [(0, 100)], skiprows = 101, skipfooter = 4)
+     minecg = minecg[~minecg[0].str.contains("No of", na=False)]
+     minecg = minecg[~minecg[0].str.contains("No. of", na=False)]
+     minecg = minecg[~minecg[0].str.contains("Comments", na=False)]
+     row = minecg[minecg[0] == '12SL Statement Code:'].index.tolist()[0]
+     minecg = minecg.iloc[row-1:]
+     minecg.reset_index(drop=True, inplace=True)
+     minecg_T = minecg.T
+     if minecg.shape[0] == 4 and pd.Series([1, 2,4,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2',5:'Minnestoa Code'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['Minnestoa Code'].str.split("\\s+", expand=True).add_prefix('minnesota_code_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A', 'Minnestoa Code'])
+     elif minecg.shape[0] == 4 and pd.Series([1,2,3,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',3:'12SL Statement Code_B',5: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
+     elif minecg.shape[0] == 4 and pd.Series([0,1,2,3]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={0: 'drop1', 1: '12SL Statement Code_A',2:'12SL Statement Code_B',3: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
+     elif minecg.shape[0] == 3 and pd.Series([1,2,4]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
+     elif minecg.shape[0] == 3 and pd.Series([2,3,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={2: 'drop1',3:'12SL Statement Code_A',5: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1','drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
+     elif minecg.shape[0] == 3 and pd.Series([0,1,2]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={0: 'drop1',1:'12SL Statement Code_A',2: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1','drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
      else:
        pass
-     min12sl['EcgID']=file
-     cols = list(min12sl.columns)
+     minecg['EcgID']=file
+     cols = list(minecg.columns)
      cols = [cols[-1]] + cols[:-1]
-     min12sl = min12sl[cols]
-     min12sl_dict130.update({file: min12sl})
+     minecg = minecg[cols]
+     minecg_dict130.update({file: minecg})
      
-min12sl_df = pd.concat(min12sl_dict130) 
-min12sl_df['EcgID'] = min12sl_df['EcgID'].str.replace(r'.txt','')
-min12sl_df.columns.name = None
-min12sl_df.to_csv('Output/min12sl/min12sl_130_df.csv', index=False) 
+minecg_df = pd.concat(minecg_dict130) 
+minecg_df['EcgID'] = minecg_df['EcgID'].str.replace(r'.txt','')
+minecg_df.columns.name = None
+minecg_df.to_csv('Output/minecg/minecg_130_df.csv', index=False) 
 
 
-min12sl_dict131 = {}
+minecg_dict131 = {}
 
 for file in files131:
-     min12sl = pd.read_fwf(file, header= None, colspecs = [(0, 100)], skiprows = 101, skipfooter = 4)
-     min12sl = min12sl[~min12sl[0].str.contains("No of", na=False)]
-     min12sl = min12sl[~min12sl[0].str.contains("No. of", na=False)]
-     min12sl = min12sl[~min12sl[0].str.contains("Comments", na=False)]
-     row = min12sl[min12sl[0] == '12SL Statement Code:'].index.tolist()[0]
-     min12sl = min12sl.iloc[row-1:]
-     min12sl.reset_index(drop=True, inplace=True)
-     min12sl_T = min12sl.T
-     if min12sl.shape[0] == 4 and pd.Series([1, 2,4,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2',5:'Minnestoa Code'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['Minnestoa Code'].str.split("\\s+", expand=True).add_prefix('minnesota_code_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A', 'Minnestoa Code'])
-     elif min12sl.shape[0] == 4 and pd.Series([1,2,3,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',3:'12SL Statement Code_B',5: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
-     elif min12sl.shape[0] == 4 and pd.Series([2,3,4,6]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={2: 'drop1', 3: '12SL Statement Code_A',4:'12SL Statement Code_B',6: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.join(min12sl['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
-     elif min12sl.shape[0] == 3 and pd.Series([1,2,4]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1', 'drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
-     elif min12sl.shape[0] == 3 and pd.Series([2,3,5]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={2: 'drop1',3:'12SL Statement Code_A',5: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1','drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
-     elif min12sl.shape[0] == 3 and pd.Series([0,1,2]).isin(min12sl_T.columns).all():
-       min12sl = min12sl.T
-       min12sl.rename(columns={0: 'drop1',1:'12SL Statement Code_A',2: 'drop2'}, inplace=True)
-       min12sl = min12sl.drop(columns=['drop1','drop2'])
-       min12sl = min12sl.join(min12sl['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
-       min12sl = min12sl.drop(columns=['12SL Statement Code_A'])
+     minecg = pd.read_fwf(file, header= None, colspecs = [(0, 100)], skiprows = 101, skipfooter = 4)
+     minecg = minecg[~minecg[0].str.contains("No of", na=False)]
+     minecg = minecg[~minecg[0].str.contains("No. of", na=False)]
+     minecg = minecg[~minecg[0].str.contains("Comments", na=False)]
+     row = minecg[minecg[0] == '12SL Statement Code:'].index.tolist()[0]
+     minecg = minecg.iloc[row-1:]
+     minecg.reset_index(drop=True, inplace=True)
+     minecg_T = minecg.T
+     if minecg.shape[0] == 4 and pd.Series([1, 2,4,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2',5:'Minnestoa Code'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['Minnestoa Code'].str.split("\\s+", expand=True).add_prefix('minnesota_code_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A', 'Minnestoa Code'])
+     elif minecg.shape[0] == 4 and pd.Series([1,2,3,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',3:'12SL Statement Code_B',5: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
+     elif minecg.shape[0] == 4 and pd.Series([2,3,4,6]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={2: 'drop1', 3: '12SL Statement Code_A',4:'12SL Statement Code_B',6: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.join(minecg['12SL Statement Code_B'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeB_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A','12SL Statement Code_B'])
+     elif minecg.shape[0] == 3 and pd.Series([1,2,4]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={1: 'drop1', 2: '12SL Statement Code_A',4: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1', 'drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
+     elif minecg.shape[0] == 3 and pd.Series([2,3,5]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={2: 'drop1',3:'12SL Statement Code_A',5: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1','drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
+     elif minecg.shape[0] == 3 and pd.Series([0,1,2]).isin(minecg_T.columns).all():
+       minecg = minecg.T
+       minecg.rename(columns={0: 'drop1',1:'12SL Statement Code_A',2: 'drop2'}, inplace=True)
+       minecg = minecg.drop(columns=['drop1','drop2'])
+       minecg = minecg.join(minecg['12SL Statement Code_A'].str.split("\\s+", expand=True).add_prefix('12Sl_statementCodeA_'))
+       minecg = minecg.drop(columns=['12SL Statement Code_A'])
      else:
        pass
-     min12sl['EcgID']=file
-     cols = list(min12sl.columns)
+     minecg['EcgID']=file
+     cols = list(minecg.columns)
      cols = [cols[-1]] + cols[:-1]
-     min12sl = min12sl[cols]
-     min12sl_dict131.update({file: min12sl})
+     minecg = minecg[cols]
+     minecg_dict131.update({file: minecg})
      
-min12sl_df = pd.concat(min12sl_dict131) 
-min12sl_df['EcgID'] = min12sl_df['EcgID'].str.replace(r'.txt','')
-min12sl_df.columns.name = None
-min12sl_df.to_csv('Output/min12sl/min12sl_131_df.csv', index=False) 
+minecg_df = pd.concat(minecg_dict131) 
+minecg_df['EcgID'] = minecg_df['EcgID'].str.replace(r'.txt','')
+minecg_df.columns.name = None
+minecg_df.to_csv('Output/minecg/minecg_131_df.csv', index=False) 
